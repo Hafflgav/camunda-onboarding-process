@@ -29,3 +29,7 @@ camunda.onboarding/.idea/
 camunda.onboarding/target/
 
 *.iml
+
+.idea/
+
+mail.service/target/
