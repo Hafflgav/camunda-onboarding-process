@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0x3dyvy" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="Decision_DecideOnTasks" name="Decide on Tasks">
+    <informationRequirement id="InformationRequirement_03ozftr">
+      <requiredInput href="#InputData_0lfat6v" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0pk3g05">
+      <requiredInput href="#InputData_0n6iuhj" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0allkh1" hitPolicy="FIRST">
+      <input id="Input_1" label="Role" camunda:inputVariable="role">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1iwvsqr">
+          <text>"Sales","Manager"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1vpftp6" label="Department" camunda:inputVariable="department">
+        <inputExpression id="LiteralExpression_1w351ts" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1xtb9wb">
+          <text>"Store","IT"</text>
+        </inputValues>
+      </input>
+      <output id="Output_1" label="Task-Result" name="taskResult" typeRef="string">
+        <outputValues id="UnaryTests_0hs3j6n">
+          <text>"default","all"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_1fk1zly">
+        <inputEntry id="UnaryTests_0ng0qyg">
+          <text>"Sales"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pkykrt">
+          <text>"Store"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j72m3p">
+          <text>"default"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1uqca1o">
+        <inputEntry id="UnaryTests_1hke8nv">
+          <text>"Manager"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jtny5n">
+          <text>"IT"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_190mw0l">
+          <text>"all"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ymk5r7">
+        <inputEntry id="UnaryTests_1ac8rp8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j1jucr">
+          <text>"IT"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o0kqsh">
+          <text>"all"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ezwuq0">
+        <inputEntry id="UnaryTests_10js8k4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tzkj46">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_132kcp5">
+          <text>"default"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0lfat6v" name="Role" />
+  <inputData id="InputData_0n6iuhj" name="Department" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_DecideOnTasks">
+        <dc:Bounds height="80" width="180" x="230" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1vrhdjm" dmnElementRef="InputData_0lfat6v">
+        <dc:Bounds height="45" width="125" x="157" y="317" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1bvr625" dmnElementRef="InformationRequirement_03ozftr">
+        <di:waypoint x="220" y="317" />
+        <di:waypoint x="290" y="180" />
+        <di:waypoint x="290" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0mu0p31" dmnElementRef="InputData_0n6iuhj">
+        <dc:Bounds height="45" width="125" x="347" y="317" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1gl2mwr" dmnElementRef="InformationRequirement_0pk3g05">
+        <di:waypoint x="410" y="317" />
+        <di:waypoint x="350" y="180" />
+        <di:waypoint x="350" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
