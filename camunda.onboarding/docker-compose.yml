@@ -1,0 +1,65 @@
+version: '2'
+
+services:
+  optimize-elasticsearch:
+    container_name: optimize-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.6.1
+    mem_limit: 2g
+    environment:
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+      - elasticsearch-logs:/usr/share/elasticsearch/logs
+      - elasticsearch-tmp:/usr/share/elasticsearch/tmp
+    networks:
+      - optimize
+    restart: always
+    depends_on:
+      - cambpm
+
+
+  optimize-jetty:
+    image: registry.camunda.cloud/team-consulting/optimize/optimize-jetty:latest
+    #image: registry.camunda.cloud/optimize:3.0.0 - has no license included, consulting one does
+    #build: /users/felix/projects/docker/optimize/optimize-jetty
+    environment:
+      - OPTIMIZE_CAMUNDABPM_REST_URL=http://cambpm:8080/engine-rest
+      - OPTIMIZE_ELASTICSEARCH_HOST=optimize-elasticsearch
+      - OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED=true
+      - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
+      - OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS=['demo']
+      - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=mytoken
+    ports:
+      - "8090:8090"
+    networks:
+      - optimize
+    mem_limit: 2g
+    depends_on:
+      - optimize-elasticsearch
+    restart: always
+
+  cambpm:
+    container_name: cambpm
+    image: cambpm
+    #build: ./
+    ports:
+      - "8080:8080"
+    networks:
+      - optimize
+    mem_limit: 2g
+    restart: always
+    environment:
+      - JAVA_OPTS=-Xmx1024m
+volumes:
+  elasticsearch-data:
+  elasticsearch-logs:
+  elasticsearch-tmp:
+
+# make sure to create the external network showroom with: docker network create showroom
+networks:
+  optimize:
+    external:
+      name: showroom
