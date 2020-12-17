@@ -2,9 +2,9 @@
 
 This project showcases an employee onboarding process. 
 
-## Build the projec
+## Build the project
 
-`mvn clean install -DskikpTests`
+`mvn clean install -DskipTests`
 
 ## Run the project directly
 
