@@ -79,7 +79,7 @@ services:
   adminer:
     image: adminer
     ports:
-      - "8088:8080"
+      - "8087:8080"
     networks:
       - optimize
 volumes:
