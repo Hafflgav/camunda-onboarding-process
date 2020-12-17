@@ -39,7 +39,7 @@ public class DomainDataSourceConfiguration {
 		// @formatter:off
 		return builder
 				.dataSource(domainDataSource())
-				.packages("org.camunda.demo.multipleDatasources.entity")
+				.packages("camunda.onboarding.workflow.entity")
 				.persistenceUnit("domainEntityManager")
 				.build();
 		// @formatter:on
