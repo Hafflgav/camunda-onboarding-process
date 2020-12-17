@@ -27,6 +27,11 @@ hs_err_pid*
 camunda.onboarding/.idea/
 
 camunda.onboarding/target/
+camunda.onboarding/.classpath
+camunda.onboarding/.project
+camunda.onboarding/.settings
+camunda.onboarding/camunda-h2-database.mv.db
+camunda.onboarding/camunda-h2-database.trace.db
 
 *.iml
 
