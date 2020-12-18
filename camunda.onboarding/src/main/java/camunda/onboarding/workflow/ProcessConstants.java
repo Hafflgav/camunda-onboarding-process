@@ -3,6 +3,7 @@ public class ProcessConstants {
 
   public static final String PROCESS_DEFINITION_KEY = "OnboardingProcess"; // BPMN Process ID
   
+  public static final String MESSAGE_TOPIC_NAME = "employeeRecruitment";
   /*
    * Activities
    */
