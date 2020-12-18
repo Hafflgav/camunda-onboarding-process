@@ -1,9 +1,10 @@
 package camunda.onboarding.workflow.adapter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.spin.json.SpinJsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +21,23 @@ public class AddEmployeeToHRSystemDelegate implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 
-		Employee employee = employeeRepository.save(new Employee("Maxe", "Meier", "8.5", "L", "Boss", "HR", new Date(), "emp-1"));
+		SpinJsonNode employeeData = (SpinJsonNode) execution.getVariable(ProcessConstants.EMPLOYEE);
+		Employee employee = new Employee(//
+				stringValue(employeeData, "name"), //
+				stringValue(employeeData, "lastName"), //
+				stringValue(employeeData, "shoeSize"), //
+				stringValue(employeeData, "tShirtSize"), //
+				stringValue(employeeData, "role"), //
+				stringValue(employeeData, "department"), //
+				LocalDate.parse((stringValue(employeeData, "startDate"))), //
+				stringValue(employeeData, "employeeNumber"));
+
+		employee = employeeRepository.save(employee);
 		execution.setVariable(ProcessConstants.EMPLOYEE_ID, employee.getId());
 		employeeRepository.flush();
 	}
 
+	private String stringValue(SpinJsonNode node, String path) {
+		return node.jsonPath(path).stringValue();
+	}
 }

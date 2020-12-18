@@ -1,5 +1,22 @@
 #spring.datasource.url: jdbc:h2:file:./camunda-h2-database
-
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+      hbm2ddl.auto: create   
+    show-sql: true
+    generate-ddl: true
+  kafka:
+    bootstrap-servers: localhost:9092
+#    producer:
+#      transaction-id-prefix: tx-
+#      properties:
+#        enable.idempotence: true
+#        transactional.id: tran-id-1
+    consumer:
+      group-id: group-1
+      enable-auto-commit: false
+      isolation-level: read_committed
 camunda:
   datasource:
     driverClassName: org.postgresql.Driver
@@ -14,13 +31,6 @@ domain:
     username: postgres
     password: postgres
     configuration.maximum-pool-size: 30   
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-      hbm2ddl.auto: create   
-    show-sql: true
-    generate-ddl: true
     
 camunda.bpm.admin-user:
   id: demo

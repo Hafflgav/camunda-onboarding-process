@@ -1,6 +1,6 @@
 package camunda.onboarding.workflow.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,15 +37,15 @@ public class Employee {
 	@Column(name = "department")
 	private String department;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name = "start_date")
-	private Date startDate;
+	private LocalDate startDate;
 
 	@Column(name = "employee_number")
 	private String employeeNumber;
 
 	public Employee(String firstName, String lastName, String shoeSize, String tShirtSize, String roleTitle,
-			String department, Date startDate, String employeeNumber) {
+			String department, LocalDate startDate, String employeeNumber) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -89,11 +89,11 @@ public class Employee {
 		this.department = department;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
