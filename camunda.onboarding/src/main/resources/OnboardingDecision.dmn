@@ -10,18 +10,18 @@
     <decisionTable id="DecisionTable_0allkh1" hitPolicy="RULE ORDER">
       <input id="Input_1" label="Role">
         <inputExpression id="InputExpression_1" typeRef="string">
-          <text>role</text>
+          <text>lower case(employee.role)</text>
         </inputExpression>
         <inputValues id="UnaryTests_1iwvsqr">
-          <text>"Sales","Manager"</text>
+          <text>"manager","sales"</text>
         </inputValues>
       </input>
       <input id="InputClause_1vpftp6" label="Department">
         <inputExpression id="LiteralExpression_1w351ts" typeRef="string">
-          <text>department</text>
+          <text>lower case(employee.department)</text>
         </inputExpression>
         <inputValues id="UnaryTests_1xtb9wb">
-          <text>"Store","IT"</text>
+          <text>"it","store"</text>
         </inputValues>
       </input>
       <output id="Output_1" label="Tasks to execute" name="tasksToExecute" typeRef="string">
@@ -31,10 +31,10 @@
       </output>
       <rule id="DecisionRule_0ymk5r7">
         <inputEntry id="UnaryTests_1ac8rp8">
-          <text>"Manager"</text>
+          <text>"manager"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0j1jucr">
-          <text>"IT"</text>
+          <text>"it"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1o0kqsh">
           <text>"procureLaptop"</text>
@@ -42,10 +42,10 @@
       </rule>
       <rule id="DecisionRule_1ezwuq0">
         <inputEntry id="UnaryTests_10js8k4">
-          <text>"Manager"</text>
+          <text>"manager"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0tzkj46">
-          <text>"IT"</text>
+          <text>"it"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_132kcp5">
           <text>"prepareDesk"</text>

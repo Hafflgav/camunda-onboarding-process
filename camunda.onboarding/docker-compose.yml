@@ -1,5 +1,10 @@
 version: '2'
 
+# make sure to create the external network showroom with: docker network create showroom
+networks:
+  default:
+    name: showroom
+    
 services:
   optimize-elasticsearch:
     container_name: optimize-elasticsearch
@@ -14,8 +19,6 @@ services:
       - elasticsearch-data:/usr/share/elasticsearch/data
       - elasticsearch-logs:/usr/share/elasticsearch/logs
       - elasticsearch-tmp:/usr/share/elasticsearch/tmp
-    networks:
-      - optimize
     restart: always
     depends_on:
       - cambpm
@@ -34,8 +37,6 @@ services:
       - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=mytoken
     ports:
       - "8090:8090"
-    networks:
-      - optimize
     mem_limit: 2g
     depends_on:
       - optimize-elasticsearch
@@ -47,8 +48,6 @@ services:
     build: ./
     ports:
       - "8080:8080"
-    networks:
-      - optimize
     mem_limit: 2g
     restart: always
     depends_on:
@@ -66,29 +65,20 @@ services:
       - "POSTGRES_PASSWORD=postgres"
       - "POSTGRES_USER=postgres"
       - "POSTGRES_DB=camunda-data"
-    networks:
-      - optimize
   db-domain:
     image: postgres
     environment:
       - "POSTGRES_PASSWORD=postgres"
       - "POSTGRES_USER=postgres"
       - "POSTGRES_DB=domain-data"
-    networks:
-      - optimize
   adminer:
     image: adminer
     ports:
       - "8087:8080"
-    networks:
-      - optimize
+      
 volumes:
   elasticsearch-data:
   elasticsearch-logs:
   elasticsearch-tmp:
 
-# make sure to create the external network showroom with: docker network create showroom
-networks:
-  optimize:
-    external:
-      name: showroom
+
