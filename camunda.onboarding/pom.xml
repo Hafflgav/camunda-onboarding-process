@@ -12,9 +12,12 @@
   </parent>
 
   <properties>
-    <java.version>14</java.version>
     <camunda.version>7.14.1-ee</camunda.version>
-    <springBoot.version>2.2.7.RELEASE</springBoot.version>
+    <springBoot.version>2.3.4.RELEASE</springBoot.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <version.java>1.8</version.java>
+    
   </properties>
 
   <groupId>camunda.onboarding.workflow</groupId>
@@ -118,12 +121,16 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
+    
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
 
-    <dependency>
-      <groupId>org.twitter4j</groupId>
-      <artifactId>twitter4j-core</artifactId>
-      <version>3.0.5</version>
-    </dependency>
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+	</dependency>
 
   </dependencies>
 

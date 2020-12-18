@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+      
+  db-camunda:
+    image: postgres
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=camunda-data"
+    ports:
+      - "5432:5432"
+
+  db-domain:
+    image: postgres
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=domain-data"
+    ports:
+      - "5433:5432"
+
+  adminer:
+    image: adminer
+    ports:
+      - "8088:8080"

@@ -43,16 +43,45 @@ services:
 
   cambpm:
     container_name: cambpm
-    image: cambpm
-    #build: ./
+    #image: cambpm
+    build: ./
     ports:
       - "8080:8080"
     networks:
       - optimize
     mem_limit: 2g
     restart: always
+    depends_on:
+      - db-camunda
+      - db-domain
     environment:
       - JAVA_OPTS=-Xmx1024m
+      - camunda.datasource.url=jdbc:postgresql://db-camunda:5432/camunda-data
+      - domain.datasource.url=jdbc:postgresql://db-domain:5432/domain-data
+      - spring.jpa.properties.hibernate.hbm2ddl.auto=create
+      
+  db-camunda:
+    image: postgres
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=camunda-data"
+    networks:
+      - optimize
+  db-domain:
+    image: postgres
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=domain-data"
+    networks:
+      - optimize
+  adminer:
+    image: adminer
+    ports:
+      - "8087:8080"
+    networks:
+      - optimize
 volumes:
   elasticsearch-data:
   elasticsearch-logs:

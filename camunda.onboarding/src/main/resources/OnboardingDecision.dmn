@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0x3dyvy" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0x3dyvy" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
   <decision id="Decision_DecideOnTasks" name="Decide on Tasks">
     <informationRequirement id="InformationRequirement_03ozftr">
       <requiredInput href="#InputData_0lfat6v" />
@@ -7,70 +7,59 @@
     <informationRequirement id="InformationRequirement_0pk3g05">
       <requiredInput href="#InputData_0n6iuhj" />
     </informationRequirement>
-    <decisionTable id="DecisionTable_0allkh1" hitPolicy="FIRST">
-      <input id="Input_1" label="Role" camunda:inputVariable="role">
+    <decisionTable id="DecisionTable_0allkh1" hitPolicy="RULE ORDER">
+      <input id="Input_1" label="Role">
         <inputExpression id="InputExpression_1" typeRef="string">
-          <text></text>
+          <text>role</text>
         </inputExpression>
         <inputValues id="UnaryTests_1iwvsqr">
           <text>"Sales","Manager"</text>
         </inputValues>
       </input>
-      <input id="InputClause_1vpftp6" label="Department" camunda:inputVariable="department">
+      <input id="InputClause_1vpftp6" label="Department">
         <inputExpression id="LiteralExpression_1w351ts" typeRef="string">
-          <text></text>
+          <text>department</text>
         </inputExpression>
         <inputValues id="UnaryTests_1xtb9wb">
           <text>"Store","IT"</text>
         </inputValues>
       </input>
-      <output id="Output_1" label="Task-Result" name="taskResult" typeRef="string">
+      <output id="Output_1" label="Tasks to execute" name="tasksToExecute" typeRef="string">
         <outputValues id="UnaryTests_0hs3j6n">
-          <text>"default","all"</text>
+          <text>"completeOnboarding","procureLaptop","prepareDesk"</text>
         </outputValues>
       </output>
-      <rule id="DecisionRule_1fk1zly">
-        <inputEntry id="UnaryTests_0ng0qyg">
-          <text>"Sales"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1pkykrt">
-          <text>"Store"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1j72m3p">
-          <text>"default"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1uqca1o">
-        <inputEntry id="UnaryTests_1hke8nv">
-          <text>"Manager"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1jtny5n">
-          <text>"IT"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_190mw0l">
-          <text>"all"</text>
-        </outputEntry>
-      </rule>
       <rule id="DecisionRule_0ymk5r7">
         <inputEntry id="UnaryTests_1ac8rp8">
-          <text></text>
+          <text>"Manager"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0j1jucr">
           <text>"IT"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1o0kqsh">
-          <text>"all"</text>
+          <text>"procureLaptop"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1ezwuq0">
         <inputEntry id="UnaryTests_10js8k4">
-          <text></text>
+          <text>"Manager"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0tzkj46">
-          <text></text>
+          <text>"IT"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_132kcp5">
-          <text>"default"</text>
+          <text>"prepareDesk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1fk1zly">
+        <inputEntry id="UnaryTests_0ng0qyg">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pkykrt">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j72m3p">
+          <text>"completeOnboarding"</text>
         </outputEntry>
       </rule>
     </decisionTable>
