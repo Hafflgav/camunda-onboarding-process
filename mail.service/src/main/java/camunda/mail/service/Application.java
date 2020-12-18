@@ -9,6 +9,7 @@ import org.slf4j.Marker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 
 @SpringBootApplication
@@ -33,10 +34,12 @@ public class Application {
                 .lockDuration(20000)
                 .handler((externalTask, externalTaskService) -> {
 
-                    createMailFromVariables(externalTask);
+                    Mail mail = createMailFromVariables(externalTask);
+                    JavaMailer mailer = new JavaMailer();
                     try {
                         LOGGER.info("Mail sent to: " + recipient);
                         LOGGER.info("Content: " + content);
+                        mailer.sendmail(mail);
                         externalTaskService.complete(externalTask);
                     } catch (Exception e) {
                         LOGGER.info((Marker) Level.SEVERE, "Exception occured", e);
@@ -47,7 +50,16 @@ public class Application {
         subscriptionBuilder.open();
     }
 
-    private static void createMailFromVariables(ExternalTask externalTask){
-
+    private static Mail createMailFromVariables(ExternalTask externalTask){
+        Mail email = new Mail();
+        try {
+            String mailRecipients = externalTask.getVariable("mailRecipients");
+            email.setMailRecipients( Arrays.asList(mailRecipients.split("\\s*,\\s*")));
+            email.setMailBody(externalTask.getVariable("mailBody"));
+            email.setMailSubject(externalTask.getVariable("mailSubject"));
+        } catch (Exception e) {
+            LOGGER.info((Marker) Level.SEVERE, "Exception occur", e);
+        }
+        return email;
     }
 }
