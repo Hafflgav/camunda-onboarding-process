@@ -15,11 +15,16 @@ public class ProcessConstants {
 	 */
 	public static final String EMPLOYEE_ID = "employeeId";
 	public static final String EMPLOYEE = "employee";
+	public static final String EMPLOYEE_ROLE = "role";
+	public static final String EMPLOYEE_DEPARTMENT = "department";
+	public static final String EMPLOYEE_NAME = "fullname";
+	public static final String EMPLOYEE_SHOESIZE = "shoeSize";
+	public static final String EMPLOYEE_T_SHIRT_SIZE = "tShirtSize";
+	public static final String EMPLOYEE_NUMBER = "employeeNumber";
 
 	/*
 	 * Messages and Events
 	 */
 	public static final String MESSAGE_EMPLOYEE_RECRUITED = "Message_EmployeeRecruited";
-
 
 }

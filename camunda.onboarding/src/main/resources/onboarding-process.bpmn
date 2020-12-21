@@ -85,7 +85,10 @@
       <bpmn:incoming>Flow_0cqrhmw</bpmn:incoming>
       <bpmn:outgoing>Flow_1ejwmyk</bpmn:outgoing>
     </bpmn:inclusiveGateway>
-    <bpmn:userTask id="CompleteOnboardingFormTask" name="Complete onboarding form">
+    <bpmn:userTask id="CompleteOnboardingFormTask" name="Complete onboarding form" camunda:formKey="embedded:/forms/task-form-pdf-upload.html">
+      <bpmn:extensionElements>
+        <camunda:taskListener delegateExpression="${getEmployeeData}" event="create" id="getEmployeeData" />
+      </bpmn:extensionElements>
       <bpmn:incoming>CompleteOnboardingSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_0cqrhmw</bpmn:outgoing>
     </bpmn:userTask>

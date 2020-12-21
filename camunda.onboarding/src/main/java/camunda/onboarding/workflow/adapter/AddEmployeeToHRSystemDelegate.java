@@ -2,8 +2,10 @@ package camunda.onboarding.workflow.adapter;
 
 import java.time.LocalDate;
 
+import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.history.HistoricVariableInstance;
 import org.camunda.spin.json.SpinJsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,9 @@ public class AddEmployeeToHRSystemDelegate implements JavaDelegate {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	HistoryService historyService;
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
@@ -34,6 +39,23 @@ public class AddEmployeeToHRSystemDelegate implements JavaDelegate {
 
 		employee = employeeRepository.save(employee);
 		execution.setVariable(ProcessConstants.EMPLOYEE_ID, employee.getId());
+		execution.setVariable(ProcessConstants.EMPLOYEE_ROLE, employee.getRoleTitle());
+		execution.setVariable(ProcessConstants.EMPLOYEE_DEPARTMENT, employee.getDepartment());
+		execution.setVariable(ProcessConstants.EMPLOYEE_NUMBER, employee.getEmployeeNumber());
+		
+		//delete variable "employee" from Runtime
+		execution.getProcessInstance().removeVariable("employee");
+
+		//delete variable "employee" from History
+		/*
+		HistoricVariableInstance varInstance = historyService//
+			.createHistoricVariableInstanceQuery()//
+			.processInstanceId(execution.getProcessInstanceId())//
+			.variableName(ProcessConstants.EMPLOYEE).singleResult();
+		historyService.deleteHistoricVariableInstance(varInstance.getId());
+		*/
+		
+		
 		employeeRepository.flush();
 	}
 

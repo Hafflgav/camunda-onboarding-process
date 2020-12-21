@@ -10,7 +10,7 @@
     <decisionTable id="DecisionTable_0allkh1" hitPolicy="RULE ORDER">
       <input id="Input_1" label="Role">
         <inputExpression id="InputExpression_1" typeRef="string">
-          <text>lower case(employee.role)</text>
+          <text>lower case(role)</text>
         </inputExpression>
         <inputValues id="UnaryTests_1iwvsqr">
           <text>"manager","sales"</text>
@@ -18,7 +18,7 @@
       </input>
       <input id="InputClause_1vpftp6" label="Department">
         <inputExpression id="LiteralExpression_1w351ts" typeRef="string">
-          <text>lower case(employee.department)</text>
+          <text>lower case(department)</text>
         </inputExpression>
         <inputValues id="UnaryTests_1xtb9wb">
           <text>"it","store"</text>

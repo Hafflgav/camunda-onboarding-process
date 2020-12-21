@@ -57,6 +57,9 @@ public class Employee {
 		this.employeeNumber = employeeNumber;
 	}
 
+	public Employee() {
+	}
+
 	public String getShoeSize() {
 		return shoeSize;
 	}
