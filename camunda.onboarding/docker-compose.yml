@@ -19,7 +19,6 @@ services:
       - elasticsearch-data:/usr/share/elasticsearch/data
       - elasticsearch-logs:/usr/share/elasticsearch/logs
       - elasticsearch-tmp:/usr/share/elasticsearch/tmp
-    restart: always
     depends_on:
       - cambpm
 
@@ -40,7 +39,6 @@ services:
     mem_limit: 2g
     depends_on:
       - optimize-elasticsearch
-    restart: always
 
   cambpm:
     container_name: cambpm
