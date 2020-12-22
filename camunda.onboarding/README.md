@@ -31,6 +31,28 @@ This project showcases an employee onboarding process.
 * use `postgres/postgres` and database `postgres`
 ![siehe hier:](./adminerLogin.png)
 
+## Produce a Topic Item for Kafka
+
+     http://localhost:38082/topics/employeeRecruitment
+     
+     {
+    "records": [
+        {
+            "key": "empl-001",
+            "value": {
+                "startDate": "2020-12-21",
+                "employeeNumber": "employee-3",
+                "name": "Stefan",
+                "lastName": "Wiese",
+                "shoeSize": "8.5",
+                "tShirtSize": "L",
+                "role": "Manager",
+                "department": "IT"
+                }
+            }
+        ]
+    }
+
 
 
 ## Run a complete dockerized version including Optimize
