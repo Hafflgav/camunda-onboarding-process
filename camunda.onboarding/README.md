@@ -31,7 +31,7 @@ This project showcases an employee onboarding process.
 * use `postgres/postgres` and database `postgres`
 ![siehe hier:](./adminerLogin.png)
 
-## Produce a Topic Item for Kafka
+## Produce an EmployeeRecruited Topic Item
 
      http://localhost:38082/topics/employeeRecruitment
      
@@ -48,6 +48,23 @@ This project showcases an employee onboarding process.
                 "tShirtSize": "L",
                 "role": "Manager",
                 "department": "IT"
+                }
+            }
+        ]
+    }
+
+
+## Produce an EmploymentDecision Topic Item
+
+     http://localhost:38082/topics/employmentDecision
+     
+     {
+    "records": [
+        {
+            "key": "empl-001",
+            "value": {
+                "employeeNumber": "employee-3",
+                "permanentlyEmployed": true
                 }
             }
         ]

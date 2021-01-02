@@ -17,21 +17,22 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-@KafkaListener(topics = TOPIC_EMPLOYEE_RECRUITED)
-public class EmployeeRecruitmentConsumer {
+@KafkaListener(topics = TOPIC_EMPLOYMENT_DECISION)
+public class EmploymentDecisionConsumer {
 
 	@Autowired
 	private RuntimeService runtimeService;
 
 	@KafkaHandler
 	public void process(String record) {
-		log.info("*** Reading employee recruited message {} ***", record);
+		log.info("*** Reading employment decision message {} ***", record);
 
-		SpinJsonNode employeeData = JSON(record);
+		SpinJsonNode employmentDecisionData = JSON(record);
 
-		runtimeService.createMessageCorrelation(ProcessConstants.MESSAGE_EMPLOYEE_RECRUITED)
-				.processInstanceBusinessKey(employeeData.jsonPath("employeeNumber").stringValue())
-				.setVariable("employee", employeeData).correlate();
+		runtimeService.createMessageCorrelation(ProcessConstants.MESSAGE_EMPLOYMENT_DECISION)
+				.processInstanceBusinessKey(employmentDecisionData.jsonPath(EMPLOYEE_NUMBER).stringValue())
+				.setVariable(PERMANENTLY_EMPLOYED, employmentDecisionData.jsonPath("permanentlyEmployed").boolValue())
+				.correlate();
 	}
 
 }

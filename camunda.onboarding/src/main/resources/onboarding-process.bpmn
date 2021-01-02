@@ -38,10 +38,10 @@
     <bpmn:sequenceFlow id="Flow_1xijoa2" sourceRef="SendFirstDayWelcomeMailTask" targetRef="WaitForDecisionEvent" />
     <bpmn:sequenceFlow id="Flow_0u58rji" sourceRef="WaitForDecisionEvent" targetRef="ResultOfTheDecisionGateway" />
     <bpmn:sequenceFlow id="PositiveSequenceFlow" name="positive" sourceRef="ResultOfTheDecisionGateway" targetRef="PermanentEmployeeEndEvent">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision == "positive"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${permanentlyEmployed}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="DidNotMetTheExpectationsSequenceFlow" name="did not met the expectations" sourceRef="ResultOfTheDecisionGateway" targetRef="TerminateEmployeeEndEvent">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision == "negative"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!permanentlyEmployed}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:inclusiveGateway id="TaskResultInclusiveGateway" name="Task-Result?">
       <bpmn:incoming>Flow_158k15l</bpmn:incoming>
@@ -95,7 +95,7 @@
     <bpmn:association id="Association_10emj7d" associationDirection="One" sourceRef="Event_0jtn4c1" targetRef="RemoveUserFromHRSystemTask" />
   </bpmn:process>
   <bpmn:message id="Message_14kxee1" name="Message_EmployeeRecruited" />
-  <bpmn:message id="Message_1ikn06i" name="Message_Decision" />
+  <bpmn:message id="Message_1ikn06i" name="Message_EmploymentDecision" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0m4phcr">
       <bpmndi:BPMNShape id="Participant_1xr8ocv_di" bpmnElement="OnboardingProcessParticipant" isHorizontal="true">

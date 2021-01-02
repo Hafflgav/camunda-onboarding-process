@@ -41,7 +41,7 @@ services:
       - optimize-elasticsearch
 
   cambpm:
-    container_name: cambpm
+    #container_name: cambpm
     image: cambpm
     #build: ./
     ports:

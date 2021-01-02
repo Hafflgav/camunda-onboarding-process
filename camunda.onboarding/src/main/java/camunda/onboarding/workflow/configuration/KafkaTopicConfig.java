@@ -27,6 +27,6 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic sampleTopic() {
-        return new NewTopic(ProcessConstants.MESSAGE_TOPIC_NAME, 1, (short) 1);
+        return new NewTopic(ProcessConstants.TOPIC_EMPLOYEE_RECRUITED, 1, (short) 1);
     }
 }
