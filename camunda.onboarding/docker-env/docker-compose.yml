@@ -27,23 +27,26 @@ services:
     image: registry.camunda.cloud/team-consulting/optimize/optimize-jetty:latest
     #image: registry.camunda.cloud/optimize:3.0.0 - has no license included, consulting one does
     #build: /users/felix/projects/docker/optimize/optimize-jetty
-    environment:
-      - OPTIMIZE_CAMUNDABPM_REST_URL=http://cambpm:8080/engine-rest
-      - OPTIMIZE_ELASTICSEARCH_HOST=optimize-elasticsearch
-      - OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED=true
-      - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
-      - OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS=['demo']
-      - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=mytoken
+#    environment:
+#       - OPTIMIZE_CAMUNDABPM_REST_URL=http://cambpm:8080/engine-rest
+#       - OPTIMIZE_ELASTICSEARCH_HOST=optimize-elasticsearch
+#       - OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED=true
+#       - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
+#       - OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS=['demo']
+#       - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=mytoken
     ports:
       - "8090:8090"
     mem_limit: 2g
+    volumes:
+     #- /Users/swiese/Documents/camunda/code/git/camunda-onboarding-process/camunda.onboarding/optimize-config.yaml:/optimize/environment/environment-config.yaml:ro
+     - ./optimize-config.yaml:/optimize/environment/environment-config.yaml:ro
     depends_on:
       - optimize-elasticsearch
 
   cambpm:
     #container_name: cambpm
-    image: cambpm
-    #build: ./
+    #image: cambpm
+    build: ../
     ports:
       - "8080:8080"
     mem_limit: 2g

@@ -7,7 +7,11 @@ This project showcases an employee onboarding process.
 
 * Stop the whole environment (if ever started before) with:
 
-    docker-compose -f docker-env/postgres.yml -f docker-env/kafka.yml -f docker-compose.yml stop
+    docker-compose -f docker-env/postgres.yml -f docker-env/kafka.yml -f docker-env/docker-compose.yml stop
+
+OR:
+    
+    docker container stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker volume prune -f
     
 
 ## Build the project
@@ -78,11 +82,11 @@ This project showcases an employee onboarding process.
 
 * Build the application:
 
-    mvn clean install -DskipTests
+    mvn clean install -Poptimize-demo -DskipTests 
 
 
 * Start the docker containers:
 
-    docker-compose -f docker-env/postgres.yml -f docker-env/kafka.yml -f docker-compose.yml up --build -d
+    docker-compose -f docker-env/postgres.yml -f docker-env/kafka.yml -f docker-env/docker-compose.yml up --build -d
  
  
