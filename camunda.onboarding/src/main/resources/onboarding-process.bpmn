@@ -88,6 +88,7 @@
     <bpmn:userTask id="CompleteOnboardingFormTask" name="Complete onboarding form" camunda:formKey="embedded:/forms/task-form-pdf-upload.html">
       <bpmn:extensionElements>
         <camunda:taskListener delegateExpression="${getEmployeeData}" event="create" id="getEmployeeData" />
+        <camunda:taskListener delegateExpression="${saveDocumentInSharePointTaskListener}" event="complete" id="saveDocumentInSharePointTaskListener" />
       </bpmn:extensionElements>
       <bpmn:incoming>CompleteOnboardingSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_0cqrhmw</bpmn:outgoing>
