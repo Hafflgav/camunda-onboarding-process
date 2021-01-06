@@ -65,10 +65,6 @@
       <bpmn:outgoing>CompleteOnboardingSequenceFlow</bpmn:outgoing>
     </bpmn:inclusiveGateway>
     <bpmn:serviceTask id="RemoveUserFromHRSystemTask" name="Remove User from HR System" isForCompensation="true" camunda:asyncBefore="true" camunda:delegateExpression="${removeUserFromHRSystem}" />
-    <bpmn:serviceTask id="PrepareDeskUIPathTask" name="Prepare Desk (UIPath)" camunda:asyncBefore="true" camunda:delegateExpression="${prepareDesk}">
-      <bpmn:incoming>PrepareDeskSequenceFlow</bpmn:incoming>
-      <bpmn:outgoing>Flow_1tkprlm</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:serviceTask id="ProcureLaptopTask" name="Procure Laptop" camunda:asyncBefore="true" camunda:type="external" camunda:topic="camunda.onboarding.procureLaptop">
       <bpmn:extensionElements>
         <camunda:properties>
@@ -78,15 +74,6 @@
       <bpmn:incoming>ProcureLaptopSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_04lz4q8</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sendTask id="SendFirstDayWelcomeMailTask" name="Send first day welcome mail" camunda:type="external" camunda:topic="mailingTopic">
-      <bpmn:extensionElements>
-        <camunda:properties>
-          <camunda:property name="simNextFire" value="${g.nowPlusMinutes(1)}" />
-        </camunda:properties>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1ejwmyk</bpmn:incoming>
-      <bpmn:outgoing>Flow_1xijoa2</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:intermediateCatchEvent id="WaitForDecisionEvent" name="Wait for decision">
       <bpmn:extensionElements>
         <camunda:properties>
@@ -127,6 +114,27 @@
       <bpmn:incoming>CompleteOnboardingSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_0cqrhmw</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sendTask id="SendFirstDayWelcomeMailTask" name="Send first day welcome mail" camunda:type="external" camunda:topic="mailingTopic">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="simNextFire" value="${g.nowPlusMinutes(1)}" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ejwmyk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xijoa2</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="PrepareDeskUIPathTask" name="Prepare Desk" camunda:modelerTemplate="ef772245-13d6-4012-8027-d6cbbab9d9dc" camunda:asyncAfter="true" camunda:type="external" camunda:topic="uipath">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="empName">${employeeNumber}</camunda:inputParameter>
+        </camunda:inputOutput>
+        <camunda:properties>
+          <camunda:property name="bot" value="HROnboardingDemo" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>PrepareDeskSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tkprlm</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:association id="Association_10emj7d" associationDirection="One" sourceRef="Event_0jtn4c1" targetRef="RemoveUserFromHRSystemTask" />
   </bpmn:process>
   <bpmn:message id="Message_14kxee1" name="Message_EmployeeRecruited" />
@@ -233,14 +241,8 @@
       <bpmndi:BPMNShape id="Activity_0drpbxd_di" bpmnElement="RemoveUserFromHRSystemTask">
         <dc:Bounds x="440" y="290" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1anyvb9_di" bpmnElement="PrepareDeskUIPathTask">
-        <dc:Bounds x="760" y="170" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1crgcdf_di" bpmnElement="ProcureLaptopTask">
         <dc:Bounds x="760" y="280" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1nj1l1b_di" bpmnElement="SendFirstDayWelcomeMailTask">
-        <dc:Bounds x="1040" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_10ivyxh_di" bpmnElement="WaitForDecisionEvent">
         <dc:Bounds x="1212" y="192" width="36" height="36" />
@@ -271,6 +273,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0zrknyo_di" bpmnElement="CompleteOnboardingFormTask">
         <dc:Bounds x="760" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nj1l1b_di" bpmnElement="SendFirstDayWelcomeMailTask">
+        <dc:Bounds x="1040" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00g6p5t_di" bpmnElement="PrepareDeskUIPathTask">
+        <dc:Bounds x="760" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_19rbt55_di" bpmnElement="Event_0jtn4c1">
         <dc:Bounds x="352" y="232" width="36" height="36" />

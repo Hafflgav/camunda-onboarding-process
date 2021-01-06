@@ -1,0 +1,54 @@
+org.camunda.bpm.rpa:
+
+  # optional license file location, defaults to camunda-license.txt on the classpath or ${user.home}/.camunda/license.txt
+#  license-file: file:///${user.dir}/license.txt
+
+  camunda-api:
+    url: http://localhost:8080/engine-rest
+    # add authentication if necessary
+    authentication:
+      type: basic
+      username: demo
+      password: demo
+
+  uipath-api:
+    # a list of external task topics to subscribe to
+    topics: uipath
+    # the base URL of your UiPath Orchestrator to send requests to (adjust to your Orchestrator URL, use https://platform.uipath.com for UiPath Automation Cloud)
+    url: https://platform.uipath.com
+    # optional Account Logical Name (necessary if you use UiPath Automation Cloud)
+#    account-name:
+    # Tenant Logical Name
+    tenant-name: DefaultTenant
+    account-name: mcalm
+    # optional folder path, defaults to "Default"
+#    folder-path:
+    # optional organization unit id
+    organization-unit-id: 997479
+    authentication:
+      # type can be either on-premises (UiPath On-Premises) or cloud (UiPath Automation Cloud)
+      type: cloud
+      # for on-premises installations, adjust to your Orchestrator URL
+      auth-url: https://account.uipath.com/oauth/token
+      # auth-url for cloud
+#      auth-url: https://account.uipath.com/oauth/token
+      # use <username>/<e-mail> (on-premises) or <client-id> (cloud)
+      user: 8DEv1AMNXczW3y4U15LL3jYf62jK93n5
+      # use <password> (on-premise) or <refresh-token>/<user-key> (cloud)
+      key: pDinCtg8ikM4-6a0jIeXeTaOoiXRW8WlUZi1xfit3EmmI
+    # the job status update mechanism to use, can be either webhook or polling
+    status-update-method: polling
+    webhook:
+      # secret used in your UiPath webhook configuration (only required if 'status-update-method' is set to 'webhook')
+      secret:
+      # optional relative path of the webhook endpoint in your application, defaults to '/webhook/event'
+#      path:
+#    polling:
+      # the rate in milliseconds to use for polling bot status updates, defaults to 4000
+#      rate-ms:
+      # the initial delay in milliseconds before polling for bot status updates starts after application startup, defaults to 4000
+#      init-delay-ms:
+      # the number of jobs to poll for in one request in order to not exceed the API request character limit, defaults to 13
+#      poll-size:
+
+server.port: 8081
