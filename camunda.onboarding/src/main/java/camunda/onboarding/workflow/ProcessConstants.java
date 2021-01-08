@@ -24,12 +24,14 @@ public class ProcessConstants {
 	public static final String EMPLOYEE_T_SHIRT_SIZE = "tShirtSize";
 	public static final String EMPLOYEE_NUMBER = "employeeNumber";
 	public static final String PERMANENTLY_EMPLOYED = "permanentlyEmployed";
+	public static final String TAX_DOCUMENT = "taxDocument";
 
 	/*
 	 * Messages and Events
 	 */
 	public static final String MESSAGE_EMPLOYEE_RECRUITED = "Message_EmployeeRecruited";
 	public static final String MESSAGE_EMPLOYMENT_DECISION = "Message_EmploymentDecision";
+
 
 
 }

@@ -1,5 +1,5 @@
 const { Client, logger, Variables, BasicAuthInterceptor } = require("camunda-external-task-client-js");
-
+const request = require('request');
 
 const basicAuth = new BasicAuthInterceptor({
   username: "demo",
@@ -20,9 +20,32 @@ const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitT
 client.subscribe("camunda.onboarding.procureLaptop", async function({ task, taskService }) {
 
     const processVariables = new Variables();
-    console.log("Sent Laptop request to ServiceNow, waiting for fulfillment now...");
-    await sleep(10000);
-    console.log("Laptop is prepared now...");
+    var u_employeenumber = task.variables.get("employeeNumber");
+    console.log("Sending Laptop request to ServiceNow, waiting for fulfillment now...");
 
-    await taskService.complete(task, processVariables);
+    request.post('https://dev62513.service-now.com/api/now/table/u_hardware_requests', 
+
+    { 
+        json: {
+          u_employeenumber: u_employeenumber,
+          u_hardwaredescription: 'Macbook',
+          u_fulfilled: false
+        },
+        auth: {
+          username: 'admin',
+          password: 'hrdemopassword#'
+        }
+    }, 
+      (error, res, body) => {
+        if (error) {
+            console.error(error);
+            return;
+        }
+        console.log(`statusCode: ${res.statusCode}`);
+        console.log("Laptop is prepared now...");
+    });
+
+
+
+await taskService.complete(task, processVariables);
 });

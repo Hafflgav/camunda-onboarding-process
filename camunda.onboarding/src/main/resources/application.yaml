@@ -46,3 +46,7 @@ mail:
   smtp:
     host: smtp.mailtrap.io
     port: 2525
+    
+azure:
+  storage:
+    accountName: hrdemo
