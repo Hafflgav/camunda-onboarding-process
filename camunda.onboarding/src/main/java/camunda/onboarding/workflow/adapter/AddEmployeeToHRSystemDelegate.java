@@ -35,13 +35,16 @@ public class AddEmployeeToHRSystemDelegate implements JavaDelegate {
 				stringValue(employeeData, "role"), //
 				stringValue(employeeData, "department"), //
 				LocalDate.parse((stringValue(employeeData, "startDate"))), //
-				stringValue(employeeData, "employeeNumber"));
+				stringValue(employeeData, "employeeNumber"), //
+				stringValue(employeeData, "email"));
 
 		employee = employeeRepository.save(employee);
+		execution.setVariable(ProcessConstants.EMPLOYEE_NAME, employee.getFirstName() + " " + employee.getLastName());
 		execution.setVariable(ProcessConstants.EMPLOYEE_ID, employee.getId());
 		execution.setVariable(ProcessConstants.EMPLOYEE_ROLE, employee.getRoleTitle());
 		execution.setVariable(ProcessConstants.EMPLOYEE_DEPARTMENT, employee.getDepartment());
 		execution.setVariable(ProcessConstants.EMPLOYEE_NUMBER, employee.getEmployeeNumber());
+		execution.setVariable(ProcessConstants.EMPLOYEE_EMAIL, employee.getEmail());
 		
 		//delete variable "employee" from Runtime
 		execution.getProcessInstance().removeVariable("employee");

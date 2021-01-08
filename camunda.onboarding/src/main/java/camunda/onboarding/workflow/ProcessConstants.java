@@ -19,6 +19,7 @@ public class ProcessConstants {
 	public static final String EMPLOYEE_ROLE = "role";
 	public static final String EMPLOYEE_DEPARTMENT = "department";
 	public static final String EMPLOYEE_NAME = "fullname";
+	public static final String EMPLOYEE_EMAIL = "email";
 	public static final String EMPLOYEE_SHOESIZE = "shoeSize";
 	public static final String EMPLOYEE_T_SHIRT_SIZE = "tShirtSize";
 	public static final String EMPLOYEE_NUMBER = "employeeNumber";
@@ -29,5 +30,6 @@ public class ProcessConstants {
 	 */
 	public static final String MESSAGE_EMPLOYEE_RECRUITED = "Message_EmployeeRecruited";
 	public static final String MESSAGE_EMPLOYMENT_DECISION = "Message_EmploymentDecision";
+
 
 }

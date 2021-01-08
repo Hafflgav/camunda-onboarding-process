@@ -114,7 +114,7 @@
       <bpmn:incoming>CompleteOnboardingSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_0cqrhmw</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sendTask id="SendFirstDayWelcomeMailTask" name="Send first day welcome mail" camunda:type="external" camunda:topic="mailingTopic">
+    <bpmn:sendTask id="SendFirstDayWelcomeMailTask" name="Send first day welcome mail" camunda:asyncBefore="true" camunda:delegateExpression="${sendMail}">
       <bpmn:extensionElements>
         <camunda:properties>
           <camunda:property name="simNextFire" value="${g.nowPlusMinutes(1)}" />

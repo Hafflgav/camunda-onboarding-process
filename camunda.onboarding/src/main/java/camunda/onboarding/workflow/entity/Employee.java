@@ -44,8 +44,11 @@ public class Employee {
 	@Column(name = "employee_number")
 	private String employeeNumber;
 
+	@Column(name = "email")
+	private String email;
+
 	public Employee(String firstName, String lastName, String shoeSize, String tShirtSize, String roleTitle,
-			String department, LocalDate startDate, String employeeNumber) {
+			String department, LocalDate startDate, String employeeNumber, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -55,6 +58,15 @@ public class Employee {
 		this.department = department;
 		this.startDate = startDate;
 		this.employeeNumber = employeeNumber;
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Employee() {

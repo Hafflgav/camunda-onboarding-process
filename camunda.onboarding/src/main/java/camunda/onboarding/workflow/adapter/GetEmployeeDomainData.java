@@ -26,7 +26,6 @@ public class GetEmployeeDomainData implements TaskListener {
 		}
 		
 		Employee employee = emp.get();
-		task.setVariableLocal(ProcessConstants.EMPLOYEE_NAME, employee.getFirstName() + " " + employee.getLastName());
 		task.setVariableLocal(ProcessConstants.EMPLOYEE_SHOESIZE, employee.getShoeSize());
 		task.setVariableLocal(ProcessConstants.EMPLOYEE_T_SHIRT_SIZE, employee.gettShirtSize());
 		

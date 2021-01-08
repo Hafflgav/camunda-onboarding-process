@@ -38,3 +38,11 @@ domain:
 camunda.bpm.admin-user:
   id: demo
   password: demo
+  
+mail:
+  from: demo@camunda.com
+  username: 75e6bb70d2864e
+  password: ddf1b8e90fb254
+  smtp:
+    host: smtp.mailtrap.io
+    port: 2525
