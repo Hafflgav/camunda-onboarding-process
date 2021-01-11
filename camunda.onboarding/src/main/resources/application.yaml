@@ -50,3 +50,4 @@ mail:
 azure:
   storage:
     accountName: hrdemo
+    connectionString: paste_here_from_your_storage_access_settings

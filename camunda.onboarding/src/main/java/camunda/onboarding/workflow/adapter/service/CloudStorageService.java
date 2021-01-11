@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.microsoft.azure.storage.CloudStorageAccount;
@@ -18,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CloudStorageService {
 
-	
-	public static final String storageConnectionString = "COPY_FROM_YOUR_STORAGE_ACCOUNT_SETTINGS";
+	@Value("${azure.storage.connectionString}")
+	private String storageConnectionString;
 
 	public void storeDocument(InputStream fileContent, String employeeNumber) throws Exception {
 
