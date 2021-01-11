@@ -18,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CloudStorageService {
 
-	public static final String storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=hrdemo;AccountKey=RjwtFAch+WwhFXSmQg71ZlRYUVWZQGsY2QO6B4krwGPy4vjiMU7bvCuZtzUL63mcxB+nAY3DsZFjdYSZjLr7qA==;EndpointSuffix=core.windows.net";
+	
+	public static final String storageConnectionString = "COPY_FROM_YOUR_STORAGE_ACCOUNT_SETTINGS";
 
 	public void storeDocument(InputStream fileContent, String employeeNumber) throws Exception {
 
