@@ -33,7 +33,7 @@ client.subscribe("camunda.onboarding.procureLaptop", async function({ task, task
         },
         auth: {
           username: 'admin',
-          password: 'hrdemopassword#'
+          password: 'FILL_YOUR_PASSWORD_HERE'
         }
     }, 
       (error, res, body) => {
