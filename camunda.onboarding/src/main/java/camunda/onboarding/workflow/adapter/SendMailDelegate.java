@@ -27,7 +27,7 @@ public class SendMailDelegate implements JavaDelegate {
 		Mail mail = new Mail();
 		mail.setMailBody(String.format("Hello %s, "
 				+ "<br>We are happy to have you on board and looking forward to have a great time together!"
-				+ "<br>Your employee number is <bold>%s</bold>, you will need it for any conversations with HR department."
+				+ "<br>Your employee number is <b>%s</b>, you will need it for any conversations with HR department."
 				+ "<p>Have a good start!"
 				+ "<br>Best regards, your HR Department"
 				

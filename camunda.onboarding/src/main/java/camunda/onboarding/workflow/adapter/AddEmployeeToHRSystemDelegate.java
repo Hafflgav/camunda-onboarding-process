@@ -20,8 +20,6 @@ public class AddEmployeeToHRSystemDelegate implements JavaDelegate {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	@Autowired
-	HistoryService historyService;
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {

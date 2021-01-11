@@ -46,10 +46,10 @@
     <bpmn:sequenceFlow id="CompleteOnboardingSequenceFlow" name="complete&#10;Onboarding" sourceRef="TaskResultInclusiveGateway" targetRef="CompleteOnboardingFormTask">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${tasks.contains("completeOnboarding")}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1tkprlm" sourceRef="PrepareDeskUIPathTask" targetRef="Gateway_058id4q" />
-    <bpmn:sequenceFlow id="Flow_04lz4q8" sourceRef="ProcureLaptopTask" targetRef="Gateway_058id4q" />
-    <bpmn:sequenceFlow id="Flow_0cqrhmw" sourceRef="CompleteOnboardingFormTask" targetRef="Gateway_058id4q" />
-    <bpmn:sequenceFlow id="Flow_1ejwmyk" sourceRef="Gateway_058id4q" targetRef="SendFirstDayWelcomeMailTask" />
+    <bpmn:sequenceFlow id="Flow_1tkprlm" sourceRef="PrepareDeskUIPathTask" targetRef="MergingTasksGateway" />
+    <bpmn:sequenceFlow id="Flow_04lz4q8" sourceRef="ProcureLaptopTask" targetRef="MergingTasksGateway" />
+    <bpmn:sequenceFlow id="Flow_0cqrhmw" sourceRef="CompleteOnboardingFormTask" targetRef="MergingTasksGateway" />
+    <bpmn:sequenceFlow id="Flow_1ejwmyk" sourceRef="MergingTasksGateway" targetRef="SendFirstDayWelcomeMailTask" />
     <bpmn:sequenceFlow id="Flow_1xijoa2" sourceRef="SendFirstDayWelcomeMailTask" targetRef="WaitForDecisionEvent" />
     <bpmn:sequenceFlow id="Flow_0u58rji" sourceRef="WaitForDecisionEvent" targetRef="ResultOfTheDecisionGateway" />
     <bpmn:sequenceFlow id="PositiveSequenceFlow" name="positive" sourceRef="ResultOfTheDecisionGateway" targetRef="PermanentEmployeeEndEvent">
@@ -65,7 +65,7 @@
       <bpmn:outgoing>CompleteOnboardingSequenceFlow</bpmn:outgoing>
     </bpmn:inclusiveGateway>
     <bpmn:serviceTask id="RemoveUserFromHRSystemTask" name="Remove User from HR System" isForCompensation="true" camunda:asyncBefore="true" camunda:delegateExpression="${removeUserFromHRSystem}" />
-    <bpmn:serviceTask id="ProcureLaptopTask" name="Procure Laptop" camunda:asyncBefore="true" camunda:type="external" camunda:topic="camunda.onboarding.procureLaptop">
+    <bpmn:serviceTask id="ProcureLaptopTask" name="Procure Laptop" camunda:type="external" camunda:topic="camunda.onboarding.procureLaptop">
       <bpmn:extensionElements>
         <camunda:properties>
           <camunda:property name="simNextFire" value="${g.nowPlusDays(g.normalFromArgs3(1,2,3, 0.7, 0.3))}" />
@@ -85,19 +85,7 @@
       <bpmn:outgoing>Flow_0u58rji</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_07tr800" messageRef="Message_1ikn06i" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:exclusiveGateway id="ResultOfTheDecisionGateway" name="Result of the decision">
-      <bpmn:incoming>Flow_0u58rji</bpmn:incoming>
-      <bpmn:outgoing>PositiveSequenceFlow</bpmn:outgoing>
-      <bpmn:outgoing>DidNotMetTheExpectationsSequenceFlow</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="PermanentEmployeeEndEvent" name="Permanent Employee">
-      <bpmn:incoming>PositiveSequenceFlow</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:endEvent id="TerminateEmployeeEndEvent" name="Terminate Employee">
-      <bpmn:incoming>DidNotMetTheExpectationsSequenceFlow</bpmn:incoming>
-      <bpmn:compensateEventDefinition id="CompensateEventDefinition_0osc8c8" />
-    </bpmn:endEvent>
-    <bpmn:inclusiveGateway id="Gateway_058id4q" camunda:asyncBefore="true">
+    <bpmn:inclusiveGateway id="MergingTasksGateway" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_1tkprlm</bpmn:incoming>
       <bpmn:incoming>Flow_04lz4q8</bpmn:incoming>
       <bpmn:incoming>Flow_0cqrhmw</bpmn:incoming>
@@ -136,6 +124,18 @@
       <bpmn:incoming>PrepareDeskSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_1tkprlm</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="ResultOfTheDecisionGateway" name="Result of the decision">
+      <bpmn:incoming>Flow_0u58rji</bpmn:incoming>
+      <bpmn:outgoing>PositiveSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>DidNotMetTheExpectationsSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="PermanentEmployeeEndEvent" name="Permanent Employee">
+      <bpmn:incoming>PositiveSequenceFlow</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="TerminateEmployeeEndEvent" name="Terminate Employee">
+      <bpmn:incoming>DidNotMetTheExpectationsSequenceFlow</bpmn:incoming>
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_0osc8c8" />
+    </bpmn:endEvent>
     <bpmn:association id="Association_10emj7d" associationDirection="One" sourceRef="Event_0jtn4c1" targetRef="RemoveUserFromHRSystemTask" />
   </bpmn:process>
   <bpmn:message id="Message_14kxee1" name="Message_EmployeeRecruited" />
@@ -251,6 +251,18 @@
           <dc:Bounds x="1190" y="235" width="81" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1wuzqwg_di" bpmnElement="MergingTasksGateway">
+        <dc:Bounds x="925" y="185" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zrknyo_di" bpmnElement="CompleteOnboardingFormTask">
+        <dc:Bounds x="760" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nj1l1b_di" bpmnElement="SendFirstDayWelcomeMailTask">
+        <dc:Bounds x="1040" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00g6p5t_di" bpmnElement="PrepareDeskUIPathTask">
+        <dc:Bounds x="760" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1ozg0bv_di" bpmnElement="ResultOfTheDecisionGateway" isMarkerVisible="true">
         <dc:Bounds x="1325" y="185" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -268,18 +280,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1446" y="345" width="49" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1wuzqwg_di" bpmnElement="Gateway_058id4q">
-        <dc:Bounds x="925" y="185" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0zrknyo_di" bpmnElement="CompleteOnboardingFormTask">
-        <dc:Bounds x="760" y="390" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1nj1l1b_di" bpmnElement="SendFirstDayWelcomeMailTask">
-        <dc:Bounds x="1040" y="170" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_00g6p5t_di" bpmnElement="PrepareDeskUIPathTask">
-        <dc:Bounds x="760" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_19rbt55_di" bpmnElement="Event_0jtn4c1">
         <dc:Bounds x="352" y="232" width="36" height="36" />
