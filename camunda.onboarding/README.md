@@ -46,12 +46,13 @@ OR:
             "value": {
                 "startDate": "2020-12-21",
                 "employeeNumber": "employee-3",
-                "name": "Stefan",
-                "lastName": "Wiese",
+                "name": "Paul",
+                "lastName": "Miller",
                 "shoeSize": "8.5",
                 "tShirtSize": "L",
                 "role": "Manager",
-                "department": "IT"
+                "department": "IT",
+                "email": "paul.miller@demo.com"
                 }
             }
         ]
