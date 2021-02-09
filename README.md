@@ -6,7 +6,8 @@ The example is structured into various projects.
 - Service-Now Connector: Acts as an external task service which triggers Service-Now.  
 - RPA Bridge: Can also be seen as an external task service which is used for the communication to UIPath in order to orchestrate RPA bots.  
 
-There will be a more detailed readme in each of those projects. 
+There will be a more detailed readme in each of those projects. In case you want to find more about how to setup the environment
+please have a look inside the main project camunda.onboarding. 
 
 ### About the Process
 The onboarding process using the following example: 

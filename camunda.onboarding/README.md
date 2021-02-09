@@ -1,8 +1,8 @@
-# Camunda Onbarding Process
+# Camunda Onboarding Process
 This is the main project containing all Camunda dependencies and corresponding implementations for the employee onboarding process. 
 
 
-## How to stop the environment
+## How to setup the environment
 1. Stop the whole environment (if ever started before) with:
   
 
@@ -51,7 +51,7 @@ Start the docker containers:
 
 ## How to interact with the process in Camunda
 
-1. Produce an EmployeeRecruited Topic Item using the REST Endpoint http://localhost:38082/topics/employeeRecruitment`
+1. Produce an EmployeeRecruited Topic Item using the REST Endpoint `http://localhost:38082/topics/employeeRecruitment`
  
 
      {
@@ -74,7 +74,7 @@ Start the docker containers:
     }
 
 
-2. Produce an EmploymentDecision Topic Item using the REST Endpoint `http://localhost:38082/topics/employmentDecision
+2. Produce an EmploymentDecision Topic Item using the REST Endpoint `http://localhost:38082/topics/employmentDecision`
    
 
      {
@@ -88,8 +88,4 @@ Start the docker containers:
             }
         ]
     }
-
-
-
-
  
