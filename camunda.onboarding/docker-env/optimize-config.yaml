@@ -53,7 +53,7 @@ engines:
     importEnabled: true
     # Determines whether this instance of Optimize should convert historical data to event data
     # usable for event based processes.
-    eventImportEnabled: false
+    eventImportEnabled: true
     authentication:
       # Toggles basic authentication on or off. When enabling basic
       # authentication, please be aware that you also need to adjust the values

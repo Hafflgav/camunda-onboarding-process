@@ -24,8 +24,8 @@ services:
 
 
   optimize-jetty:
-    image: registry.camunda.cloud/team-consulting/optimize/optimize-jetty:latest
-    #image: registry.camunda.cloud/optimize:3.0.0 - has no license included, consulting one does
+    #image: registry.camunda.cloud/team-consulting/optimize/optimize-jetty:latest
+    image: registry.camunda.cloud/optimize:3.3.0 #- has no license included, consulting one does
     #build: /users/felix/projects/docker/optimize/optimize-jetty
 #    environment:
 #       - OPTIMIZE_CAMUNDABPM_REST_URL=http://cambpm:8080/engine-rest
@@ -39,7 +39,7 @@ services:
     mem_limit: 2g
     volumes:
      #- /Users/swiese/Documents/camunda/code/git/camunda-onboarding-process/camunda.onboarding/optimize-config.yaml:/optimize/environment/environment-config.yaml:ro
-     - ./optimize-config.yaml:/optimize/environment/environment-config.yaml:ro
+     - ./optimize-config.yaml:/optimize/config/environment-config.yaml:ro
     depends_on:
       - optimize-elasticsearch
 
