@@ -32,7 +32,7 @@ Access cockpit with `http://localhost:8080`
 
 Build the application:
 
-    mvn clean install -Poptimize-demo -DskipTests
+    mvn clean install -P optimize-demo -DskipTests
 
 Start the docker containers:
 
