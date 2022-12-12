@@ -1,4 +1,6 @@
-# Camunda-Onboarding-Process
+# Camunda 7-Onboarding-Process
+![](https://img.shields.io/badge/Compatible%20with-Camunda%20Platform%207-26d07c)
+
 ### About this Repository
 This repository keeps all the source code for an HR onboarding example done with Camunda. 
 The example is structured into various projects.
